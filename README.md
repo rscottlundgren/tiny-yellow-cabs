@@ -90,6 +90,9 @@ I reached out to "the Client" (aka Tinybird) with [further exploratory questions
 Due to the relative size of the program I wanted to keep things as compact as possible relying on a main file ([tiny_yellow_cabs.py](tiny_yellow_cabs.py)) to handle user interaction, a validation module ([validators.py](validators.py)) to handle user data validation, and a class 'YellowCabDistanceStats' ([yellow_cab_distance_stats.py](yellow_cab_distance_stats.py)) to handle creation and extraction of all data. The overall program follows a simple flow of control. 
 
 #### First Request: "Please enter the month name / abbreviation or 'q' to quit: "
+
+The first action the program will take is to establish some state variables holding sentinel values (which will be discussed later) and it will ping the local machine for the current working directory of the cloned repo (this will be used later).
+
 After some brief introductory text is displayed in the terminal, the User is prompted with their first request or the option to quit the program by typing 'q'. If they choose to quit the program at this time, each subsequent point of control flow will be shortcircuited by the default sentinel values in the program, leaving the program to say "Goodbye!" to the User before quitting.
 
 If the User enters a value that is not within the accept range of 2009 to the present year (determined by the value returned using `datetime.date.today().year`), then an appropriate error message is displayed based on the value entered and the User is again prompted to enter a valid year:
@@ -109,6 +112,8 @@ Finally, just like in the first request, if the User does not enter a valid mont
 
 ![Month Errors](./docs/img/002_tyc_month_errors.jpg)
 
+For the sake of this example, let's say the User has entered April / Apr as their month.
+
 **Hold on, wait... why 91 days? Why not 60 days?**
 Good question! It's July 7, 2023 today and looking at the [NYC “Yellow Taxi” Trips Data](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) site the most recent available month is April 2023, which means there's a two month difference (May & June) between today (July) and the most recent available month. If the program were to calculate a 61 days difference (the extra day is just a nice buffer to give to the TLC), then if I entered, May 2023 as my month and year into the program, we would get a result of 67 days. That's more than 61 but May isn't available on the NYC "Yellow Taxi" Trips Data site today (sadly). This means the program needs to build in an extra 30 days (30 + 61 = 91) to accommodate for that two month period between the current date and the most recent available data.
 
@@ -117,24 +122,31 @@ Just like with the first and second requests, the User is prompted to provide a 
 
 If the User has entered a value that is not within the accepted range of 0.0 to 1.0 (inclusive), then an appropriate error message is displayed based on the value entered and the User is again prompted to enter a valid year:
 
+![Percentile Errors](./docs/img/003_tyc_percentile_errors.jpg)
 
+Once the User has entered a valid percentile (between 0.0 and 1.0 (inclusive)), the program will save that percentile to a variable and will move onto processing the request for data.
 
-- Program asks the User to provide a valid percentile for the data they want extracted from the month / year data set
-  - If the User quits, the subsequent pre-established sentinel values short circuit the other prompts, closing the program
-  - If the User enters a value, that value is validated and the User moves forward
-- The data is appropriately parsed and then downloaded onto the User's local machine
-- The program provides a "Quick Summary" of the data, the location of the extracted file / file name, and then ends.
+For the sake of this example, let's say the User has entered 0.9 as the percentile.
 
-According to the [NYC “Yellow Taxi” Trips Data](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) site, all data was stored in a parquet format (.parquet) extension, which made it easier / more efficient to parse.
+#### Processing The Request & Returning The Results
 
-Additionally, according to that same site, "Trip data will be published monthly (with two months delay) instead of bi-annually". This made validating the date range relatively easy:
+After securing valid year, month, and percentile data points, and calling the value stored in the state variable holding the current working directory, the program will create an instance of the "YellowCabDistanceStats" class which will take the following steps:
 
-1. Create a date object out of the User provided month and year (e.g. create `2020-07-01` out of the User provided `2020`, `Jul` values)
-2. Extract today's date, using `datetime.date.today()`
-3. Subtract the date object created from the User's month and year values (`2020-07-01`) from today's date (`datetime.date.today()`) and apply the `days()` method to the result
-4. If that value is greater than 91 days, the User provided month and year data should be available for use from the [NYC “Yellow Taxi” Trips Data](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) site.
+1. It will assign the year to the class' year attribute
+2. It will assign the month to the class' month attribute
+3. It will assign the percentile to the class' percentile attribute
+4. It will make a connection to the URL where the desired parquet file is stored and it will read that parquet file into a pandas dataframe which will be stored in the class' raw dataframe attribute[^2]
+5. It will take the stored raw dataframe, sort and reindex the dataframe by `trip_distance`, calculate the slice index by multiplying the stored percentile by the total number of rows in the raw dataframe, and slice the raw dataframe, storing the lower portion of the slice in the class' below percentile dataframe attribute
+6. It will store the total number of raw trips in the class' total raw trips attribute
+7. It will store the total number of trips that are below the percentile in the class' total below percentile trips attribute
+8. It will store the saved file path (which is used to create the folder which will hold the results) to the class' saved file path attribute
+9. It will store the saved file name of the downloaded document to the class' saved full file name attribute
 
-Following the above logic allowed me to avoid having to "hardcode" dates into the program.
+As the program is completing these tasks of storing data for later recall it is posting messages to the terminal window, notifying the User of which action is presently being taken at that point and notifying them once the process is complete.
+
+Finally, when the class has been created, the parquet file containing the month and year data that's under the provided percentile is saved to the User's machine and a brief summary of the data contained therein (along with the file path and location of the returned file) are printed to the terminal before the program closes.
+
+![Completed Run](./docs/img/004_tyc_complete_run.jpg)
 
 [Back To Top](https://github.com/rscottlundgren/tiny-yellow-cabs)
 
@@ -178,3 +190,4 @@ Another change to a subset of the data: TPEP and LPEP trip data PARQUETs from Ja
   - The API: https://dev.socrata.com/foundry/data.cityofnewyork.us/pqfs-mqru
 
 [^1]: At the time of this writing, the date was 07/07/2023 or July 7, 2023.
+[^2]: Thankfully the parquet files are stored following a standardized file path where the only differentiating markers are the year and the month, which is what allows this call to be so brief.
