@@ -11,6 +11,8 @@ ERROR_INVALID_MONTH = colors.RED_BOLD_BRIGHT + 'ERROR - Invalid Input\n' + color
 ERROR_RECORD_NOT_AVAILABLE = colors.RED_BOLD_BRIGHT + 'ERROR - Record Not Available\n' + colors.RESET + colors.RED + 'Record for selected month unavailable; please enter a month greater than 91 days in the past.\n' + colors.RESET
 
 NOTIFICATION_PROCESSING_REQUEST = colors.GREEN_BOLD_BRIGHT + '\nPlease Hold: Processing Your Request...\n' + colors.RESET
+NOTIFICATION_INTRO = '\nThank you for using \'Tiny Yellow Cabs\'.\n\nThis application will allow you to parse NYC "Yellow Taxi" trip data for a particular month and year that you select under a percentile that you provide.\nYou have access to data as far back as January 2009 up to two (2) months ago (i.e. if it is July right now, the latest month you can access is April of the current year).\nOnce you have provided those three pieces of information (a valid year, month, and percentile), a .parquet file will be downloaded onto your local machine and a location on where to find it will be shown in the terminal.\n'
+NOTIFICATION_GOODBYE = '\nGoodbye!\n'
 
 PROMPT_USER_TO_INPUT_MONTH_OR_QUIT = 'Please enter the month name / abbreviation or \'q\' to quit: '
 PROMPT_USER_TO_INPUT_PERCENTILE_OR_QUIT = 'Please enter the percentile value (between 0.0 & 1.0) or \'q\' to quit: '
