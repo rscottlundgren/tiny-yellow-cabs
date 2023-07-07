@@ -15,6 +15,9 @@ def run_program():
     valid_percentile = -0.1
 
     # Behavior
+    # Provide the User with a brief introduction to the program
+    print(msg.NOTIFICATION_INTRO)
+
     # Prompt the User for a year
     user_input = input(msg.PROMPT_USER_TO_INPUT_YEAR_OR_QUIT)
 
@@ -59,5 +62,7 @@ def run_program():
 
         # Display the location and file name of the saved parquet file for the User's reference
         requested_data.display_file_name_and_location()
+    
+    print(msg.NOTIFICATION_GOODBYE)
 
 run_program()
