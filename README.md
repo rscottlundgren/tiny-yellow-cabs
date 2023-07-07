@@ -1,5 +1,3 @@
-A repo with all the code you used and a readme (in english) explaining your approach, the steps to reproduce your test and everything you feel is important.
-
 # Tiny Yellow Cabs
 
 "Tiny Yellow Cabs" is a program that I wrote as part of the [interview process](https://gist.github.com/javisantana/a1962319a06dd1a05b14d5e9738c8f75) for a Data Engineer position at [Tinybird](https://www.tinybird.co/). At it's core, the program pulls a slice of data from the [NYC “Yellow Taxi” Trips Data](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) site, returning the resulting data as a .parquet file to the User's local machine. When executed, the program will prompt the User with three questions:
