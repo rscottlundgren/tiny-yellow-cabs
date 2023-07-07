@@ -189,23 +189,23 @@ def collect_desired_percentile(user_input):
         # Try to convert the User's input into a float - if the conversion is not possible, print an error message to the terminal and request another input
         try:
             converted_user_input = float(user_input)
+            # If the converted input is less than 0 or greater than 1...
+            if converted_user_input < 0.0 or converted_user_input > 1.0:
+
+                # Print an error message to the terminal and request another input
+                print(msg.ERROR_INPUT_PERCENTILE_NOT_IN_RANGE)
+                user_input = input(msg.PROMPT_USER_TO_INPUT_PERCENTILE_OR_QUIT)
+        
+            # Otherwise...
+            else:
+
+                # Change the trigger to represent that a valid percentile has been found and assign that percentile's value to the returned variable
+                validated_input = converted_user_input
+                user_entered_valid_percentile = True
+
         except ValueError:
             print(msg.ERROR_INPUT_PERCENTILE_NOT_NUMERIC)
             user_input = input(msg.PROMPT_USER_TO_INPUT_PERCENTILE_OR_QUIT)
-
-        # If the converted input is less than 0 or greater than 1...
-        if converted_user_input < 0.0 or converted_user_input > 1.0:
-
-            # Print an error message to the terminal and request another input
-            print(msg.ERROR_INPUT_PERCENTILE_NOT_IN_RANGE)
-            user_input = input(msg.PROMPT_USER_TO_INPUT_PERCENTILE_OR_QUIT)
-        
-        # Otherwise...
-        else:
-
-            # Change the trigger to represent that a valid percentile has been found and assign that percentile's value to the returned variable
-            validated_input = converted_user_input
-            user_entered_valid_percentile = True
 
     # Return the validated (or "validated", if the User quit) value
     return validated_input
