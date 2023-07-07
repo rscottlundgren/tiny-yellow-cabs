@@ -5,7 +5,7 @@ A repo with all the code you used and a readme (in english) explaining your appr
 ## Table of Contents
 
 - [Using The Program](https://github.com/rscottlundgren/tiny-yellow-cabs#using-the-program)
-  - [Download Python 3.11]()
+  - [Download Python 3.11](https://github.com/rscottlundgren/tiny-yellow-cabs#download-python-311)
   - [Cloning The Repo](https://github.com/rscottlundgren/tiny-yellow-cabs#cloning-the-repo)
   - [Running The Program](https://github.com/rscottlundgren/tiny-yellow-cabs#running-the-program)
 - [Approach](https://github.com/rscottlundgren/tiny-yellow-cabs#approach)
