@@ -37,19 +37,23 @@ Once you have a working version of Python 3.11 on your local machine...
     ```
 
 ### Running The Program
-1. To start the program, enter the following command into your terminal and hit "Enter":
+1. Before starting the program, you'll want to install the appropriate dependencies by running this script:
+   ```
+   pip3 install -r requirements.txt
+   ```
+2. To start the program, enter the following command into your terminal and hit "Enter":
    ```
    python3 tiny-yellow-cabs.py
    ```
-2. The program will then prompt you with its first question - asking you to enter a year (that year should be between 2009 and the current year). Enter your selected year and hit "Enter".
-3. The program will then prompt you with its second question - asking you to enter a month (that month should be entered as either a full name (i.e. January) or a three-letter abbreviation (i.e. Jan) and should be a month that occurred 2 months prior to the present month or earlier). Enter your selected month and hit "Enter". If you're looking for further examples the below might help:
+3. The program will then prompt you with its first question - asking you to enter a year (that year should be between 2009 and the current year). Enter your selected year and hit "Enter".
+4. The program will then prompt you with its second question - asking you to enter a month (that month should be entered as either a full name (i.e. January) or a three-letter abbreviation (i.e. Jan) and should be a month that occurred 2 months prior to the present month or earlier). Enter your selected month and hit "Enter". If you're looking for further examples the below might help:
 
    1. If today is March 15, 2023 and you entered 2023 as your year, the latest month you can enter is January / Jan
    2. If today is February 28, 2024 and you entered 2023 as your year, the latest month you can enter is November / Nov
    3. If today is July 4, 2023 and you entered 2020 as your year, the latest month you can enter is December / Dec
 
-4. The program will then prompt you with its third (and final) question - asking you to enter a percentile (that percentile should be a decimal (aka a float) between 0.0 and 1.0, inclusive). Enter your desired percentile and hit "Enter".
-5. After the questions have been answered, the program will run through a series of actions, documenting each action to the Terminal. At the end of the program you'll receive a quick summary of the data that was parsed and details as to where the results file (`.parquet` extension) is stored, then the program will shut down.
+5. The program will then prompt you with its third (and final) question - asking you to enter a percentile (that percentile should be a decimal (aka a float) between 0.0 and 1.0, inclusive). Enter your desired percentile and hit "Enter".
+6. After the questions have been answered, the program will run through a series of actions, documenting each action to the Terminal. At the end of the program you'll receive a quick summary of the data that was parsed and details as to where the results file (`.parquet` extension) is stored, then the program will shut down.
 
 [Back To Top](https://github.com/rscottlundgren/tiny-yellow-cabs)
 
