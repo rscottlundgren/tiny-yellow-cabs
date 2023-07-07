@@ -1,6 +1,6 @@
 # Tiny Yellow Cabs
 
-"Tiny Yellow Cabs" is a program that I wrote as part of the [interview process](https://gist.github.com/javisantana/a1962319a06dd1a05b14d5e9738c8f75) for a Data Engineer position at [Tinybird](https://www.tinybird.co/). At it's core, the program pulls a slice of data from the [NYC “Yellow Taxi” Trips Data](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) site, returning the resulting data as a .parquet file to the User's local machine. When executed, the program will prompt the User with three questions:
+"Tiny Yellow Cabs" is a program that I wrote as part of the [interview process](https://gist.github.com/javisantana/a1962319a06dd1a05b14d5e9738c8f75) for a Data Engineer position at [Tinybird](https://www.tinybird.co/). At its core, the program pulls a slice of data from the [NYC “Yellow Taxi” Trips Data](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) site, returning the resulting data as a .parquet file to the User's local machine. When executed, the program will prompt the User with three questions:
 
 1. What year are you looking to get the data from?
 2. What month (of that year) are you looking to get the data from?
@@ -43,7 +43,7 @@ Once you have a working version of Python 3.11 on your local machine...
    ```
 2. To start the program, enter the following command into your terminal and hit "Enter":
    ```
-   python3 tiny-yellow-cabs.py
+   python3 tiny_yellow_cabs.py
    ```
 3. The program will then prompt you with its first question - asking you to enter a year (that year should be between 2009 and the current year). Enter your selected year and hit "Enter".
 4. The program will then prompt you with its second question - asking you to enter a month (that month should be entered as either a full name (i.e. January) or a three-letter abbreviation (i.e. Jan) and should be a month that occurred 2 months prior to the present month or earlier). Enter your selected month and hit "Enter". If you're looking for further examples the below might help:
